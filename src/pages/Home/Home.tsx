@@ -143,7 +143,8 @@ export const Home: React.FC = () => {
 								<li key={name} className="relative w-max">
 									<Link
 										to={url}
-										className={`${styles.contactLink} Link`}
+										className="Link"
+										id={styles.contactLink}
 									>
 										{name}
 									</Link>
