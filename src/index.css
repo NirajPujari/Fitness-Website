@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  --first: #ffffff;
+  --secound: #000000;
+  --third: #0029ff;
+  --blue-gradient: linear-gradient(90deg, rgba(0, 43, 255, 1) 0%, rgba(0, 41, 255, 1) 100%);
+  --shadow: 0px 23px 21px -8px rgba(136, 160, 255, 0.25);
+
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--first);
+  color: var(--secound);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.Title {
+  font-weight: bold;
+  font-size: 4rem;
+}
+
+.PrimaryText {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.SecondaryText {
+  font-size: 1rem;
+  font-family: Cabin, OpenSans;
+}
+
+
+.paddings {
+  padding: 1rem;
+}
+
+.innerWidth {
+  width: 100%;
+}
+
+.button {
+  font-weight: 500;
+  padding: 0.6rem 1.4rem;
+  color: white;
+  background: var(--blue-gradient);
+  border: none;
+  border-radius: 4px;
+  transition: all 300ms ease-in;
+}
+
+.button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.Link {
+  transition: all 0.3s ease-in;
+}
+
+.Link::before {
+  content: '';
+  position: absolute;
+  bottom: 9.5px;
+  left: 1px;
+  width: 0%;
+  height: 2.5px;
+  background-color: transparent;
+  transition: all 0.5s ease-in-out;
+}
+
+.Link:hover::before {
+  width: 100%;
+  background-color: var(--first);
+}
+
+/* media queries */
+@media (min-width: 1536px) {
+  .innerWidth {
+    max-width: 1536px;
+    margin: auto;
+  }
+}
+
+@media (min-width: 640px) {
+  .paddings {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1280px),
+(min-width: 768px) {
+  .paddings {
+    padding: 1.5rem;
+  }
+}

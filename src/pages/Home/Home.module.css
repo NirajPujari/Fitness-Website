@@ -1,0 +1,7 @@
+.contactLink::before {
+  bottom: 2px;
+}
+
+.contactLink:hover::before {
+  background-color: var(--secound);
+}
