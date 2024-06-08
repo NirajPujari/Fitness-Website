@@ -10,7 +10,7 @@ export const Cards: React.FC<CardsProps> = ({ data }) => {
 					image={card.image}
 					title={card.title}
 					className="mb-8"
-					key={card.id}
+					key={card._id}
 				>
 					<p>{card.description}</p>
 				</Card>

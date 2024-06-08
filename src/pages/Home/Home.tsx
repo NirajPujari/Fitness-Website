@@ -1,111 +1,66 @@
 import styles from "./Home.module.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Hero, TextImageBlock, Cards } from "../../components";
 import { CardData, SoftLinks } from "../../types";
 import { Link } from "react-router-dom";
+import { aboutUs } from "../../assets/img";
 import {
-	aboutUs,
-	calisthenics,
-	cardio_Strenght,
-	DMT,
-	groupTraining,
-	personalTraining,
-	sauna_Steam,
-	swimmingPool,
-	yoga_Pilates,
-} from "../../assets/img";
-
-const data: CardData[] = [
-	{
-		id: 1,
-		title: "Personal Training",
-		image: personalTraining,
-		description:
-			"Get personalized one-on-one training tailored to your fitness goals.",
-	},
-	{
-		id: 2,
-		title: "Group Fitness Classes",
-		image: groupTraining,
-		description:
-			"Join our diverse fitness classes led by experienced instructors.",
-	},
-	{
-		id: 3,
-		title: "Dynamic Movement Training (DMT)",
-		image: DMT,
-		description:
-			"Dynamic and engaging exercise form that enhances overall mobility, strength, and body functionality.",
-	},
-	{
-		id: 4,
-		title: "Calisthenics",
-		image: calisthenics,
-		description:
-			"Bodyweight-based fitness discipline that leverages natural movements to build strength, flexibility, and endurance.",
-	},
-	{
-		id: 5,
-		title: "Cardio & Strength Training",
-		image: cardio_Strenght,
-		description:
-			"Access top-notch cardio and strength training equipment to push your limits.",
-	},
-	{
-		id: 6,
-		title: "Yoga & Pilates",
-		image: yoga_Pilates,
-		description:
-			"Experience the benefits of yoga and Pilates for flexibility and mindfulness.",
-	},
-	{
-		id: 7,
-		title: "Swimming Pool",
-		image: swimmingPool,
-		description:
-			"Enjoy our spacious swimming pool for a refreshing workout or leisure.",
-	},
-	{
-		id: 8,
-		title: "Sauna & Steam Room",
-		image: sauna_Steam,
-		description:
-			"Relax and rejuvenate in our sauna and steam room facilities.",
-	},
-];
-
-const softLinks: SoftLinks[] = [
-	{
-		title: "Membership",
-		links: [
-			{ name: "Membership Options", url: "/" },
-			{ name: "Frequently Asked Questions", url: "/" },
-			{ name: "Get Membership", url: "/" },
-			{ name: "Get Sessions", url: "/" },
-		],
-	},
-	{
-		title: "Policies & Legal",
-		links: [
-			{ name: "Privacy Policy", url: "/" },
-			{ name: "Terms & Conditions - Website", url: "/" },
-			{ name: "Terms & Conditions - Members", url: "/" },
-			{ name: "Labour Compliance Documents", url: "/" },
-		],
-	},
-	{
-		title: "Customer Services",
-		links: [
-			{ name: "Personal Training", url: "/" },
-			{ name: "Swimming Pool", url: "/" },
-			{ name: "Sauna Steam Room", url: "/" },
-			{ name: "Contact Us", url: "/" },
-			{ name: "Member's Enquiry", url: "/" },
-		],
-	},
-];
+	fetchWrapper,
+	getLocalStorageItem,
+	removeLocalStorageItems,
+	setLocalStorageItem,
+} from "../../utils";
 
 export const Home: React.FC = () => {
+	const [data, setData] = useState<CardData[]>([]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const localData = getLocalStorageItem<CardData[]>("cardData");
+			const fetchedData = await fetchWrapper(
+				"https://powerhousefitnessapi.vercel.app/api/cards"
+			);
+			if (localData == fetchedData && localData) {
+				setData(localData);
+			} else {
+				removeLocalStorageItems(["cardData"]);
+				setLocalStorageItem<CardData[]>("cardData", fetchedData);
+				setData(fetchedData);
+			}
+		};
+		fetchData();
+	}, []);
+
+	const softLinks: SoftLinks[] = [
+		{
+			title: "Membership",
+			links: [
+				{ name: "Membership Options", url: "/" },
+				{ name: "Frequently Asked Questions", url: "/" },
+				{ name: "Get Membership", url: "/" },
+				{ name: "Get Sessions", url: "/" },
+			],
+		},
+		{
+			title: "Policies & Legal",
+			links: [
+				{ name: "Privacy Policy", url: "/" },
+				{ name: "Terms & Conditions - Website", url: "/" },
+				{ name: "Terms & Conditions - Members", url: "/" },
+				{ name: "Labour Compliance Documents", url: "/" },
+			],
+		},
+		{
+			title: "Customer Services",
+			links: [
+				{ name: "Personal Training", url: "/" },
+				{ name: "Swimming Pool", url: "/" },
+				{ name: "Sauna Steam Room", url: "/" },
+				{ name: "Contact Us", url: "/" },
+				{ name: "Member's Enquiry", url: "/" },
+			],
+		},
+	];
 	return (
 		<main>
 			<Hero />

@@ -21,7 +21,7 @@ export interface TextAsideProps {
 }
 
 export interface CardData {
-	id: number;
+	_id: number;
 	title: string;
 	image: string;
 	description: string;
